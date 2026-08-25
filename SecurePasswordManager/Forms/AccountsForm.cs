@@ -40,7 +40,6 @@ namespace SecurePasswordManager.Forms
 
             btnAdd.Click += btnAdd_Click;
             btnUpdate.Click += btnUpdate_Click;
-            btnDelete.Click += btnDelete_Click;
             btnClear.Click += btnClear_Click;
 
             btnGeneratePassword.Click += btnGeneratePassword_Click;

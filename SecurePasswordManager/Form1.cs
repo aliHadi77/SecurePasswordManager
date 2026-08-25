@@ -31,14 +31,7 @@ namespace SecurePasswordManager
 
             _repository =
                 new VaultRepository(databasePath);
-            _repository =
-    new VaultRepository(databasePath);
 
-            MessageBox.Show(
-                $"عدد الخزائن: {_repository.GetVaultCount()}",
-                "فحص",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
             var encryptionService =
                 new EncryptionService();
 

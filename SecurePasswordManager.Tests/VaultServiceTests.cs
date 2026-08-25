@@ -237,7 +237,7 @@ public class VaultServiceTests
     }
 
     [Fact]
-    public void CreateVault_ShouldGenerateDifferentEncryptedDek_ForDifferentVaults()
+    public void CreateVault_WhenVaultAlreadyExists_ShouldFail()
     {
         string path = CreateTestDatabasePath();
 
@@ -246,17 +246,16 @@ public class VaultServiceTests
             VaultService service =
                 CreateService(path);
 
-            long firstId =
-                service.CreateVault(
-                    "StrongMasterPassword!123");
+            _ = service.CreateVault(
+                "StrongMasterPassword!123");
 
-            service = CreateService(path);
+            Assert.Throws<InvalidOperationException>(
+                () => service.CreateVault(
+                    "AnotherStrongMasterPassword!456"));
 
-            long secondId =
-                service.CreateVault(
-                    "StrongMasterPassword!123");
+            var repository = new VaultRepository(path);
 
-            Assert.NotEqual(firstId, secondId);
+            Assert.Equal(1, repository.GetVaultCount());
         }
         finally
         {
