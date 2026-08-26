@@ -16,6 +16,7 @@ namespace SecurePasswordManager.Forms
 
         private long? _selectedEntryId;
         private bool _passwordVisible;
+        private bool _isLoadingEntries;
 
         public AccountsForm(
             EntryService entryService,
@@ -115,6 +116,8 @@ namespace SecurePasswordManager.Forms
         {
             try
             {
+                _isLoadingEntries = true;
+
                 List<VaultEntry> entries =
                     _entryService.GetEntries();
 
@@ -131,12 +134,18 @@ namespace SecurePasswordManager.Forms
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+            finally
+            {
+                _isLoadingEntries = false;
+            }
         }
 
         private void SearchEntries()
         {
             try
             {
+                _isLoadingEntries = true;
+
                 string searchText =
                     txtSearch.Text.Trim();
 
@@ -167,12 +176,19 @@ namespace SecurePasswordManager.Forms
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
+            finally
+            {
+                _isLoadingEntries = false;
+            }
         }
 
         private void dgvAccounts_SelectionChanged(
             object? sender,
             EventArgs e)
         {
+            if (_isLoadingEntries)
+                return;
+
             if (dgvAccounts.CurrentRow == null)
                 return;
 
