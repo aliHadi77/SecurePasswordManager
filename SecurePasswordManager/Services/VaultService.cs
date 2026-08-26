@@ -37,7 +37,7 @@ public sealed class VaultService
 
     public long CreateVault(string masterPassword)
     {
-        ValidateMasterPassword(masterPassword);
+        MasterPasswordValidator.Validate(masterPassword);
 
         if (_repository.GetVaultCount() > 0)
         {

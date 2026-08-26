@@ -30,12 +30,17 @@ namespace SecurePasswordManager.Forms
             string confirmPassword =
                 txtConfirmPassword.Text;
 
-            if (string.IsNullOrWhiteSpace(
-                    masterPassword))
+            try
+            {
+                SecurePasswordManager.Security.MasterPasswordValidator.Validate(
+                    masterPassword);
+
+            }
+            catch (ArgumentException ex)
             {
                 MessageBox.Show(
-                    "يرجى إدخال كلمة المرور الرئيسية.",
-                    "بيانات ناقصة",
+                    ex.Message,
+                    "بيانات غير صحيحة",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
 

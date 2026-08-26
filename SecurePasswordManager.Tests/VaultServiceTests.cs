@@ -212,6 +212,29 @@ public class VaultServiceTests
     }
 
     [Fact]
+    public void CreateVault_WithPasswordViolatingPolicy_ShouldNotCreateVault()
+    {
+        string path = CreateTestDatabasePath();
+
+        try
+        {
+            VaultService service =
+                CreateService(path);
+
+            Assert.Throws<ArgumentException>(
+                () => service.CreateVault("short"));
+
+            var repository = new VaultRepository(path);
+
+            Assert.Equal(0, repository.GetVaultCount());
+        }
+        finally
+        {
+            DeleteTestDatabase(path);
+        }
+    }
+
+    [Fact]
     public void Unlock_WithEmptyPassword_ShouldFail()
     {
         string path = CreateTestDatabasePath();
