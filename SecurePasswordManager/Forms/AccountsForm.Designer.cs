@@ -10,7 +10,8 @@
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.
+        /// </summary>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -123,9 +124,15 @@
             // dgvAccounts
             // 
             dgvAccounts.AllowUserToAddRows = false;
+            dgvAccounts.AllowUserToDeleteRows = false;
+            dgvAccounts.AllowUserToResizeRows = false;
             dgvAccounts.AutoGenerateColumns = false;
             dgvAccounts.BackgroundColor = Color.White;
             dgvAccounts.BorderStyle = BorderStyle.FixedSingle;
+            dgvAccounts.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgvAccounts.ColumnHeadersBorderStyle =
+                DataGridViewHeaderBorderStyle.Single;
+
             dgvAccounts.ColumnHeadersDefaultCellStyle =
                 new DataGridViewCellStyle
                 {
@@ -137,7 +144,12 @@
                         FontStyle.Bold,
                         GraphicsUnit.Point,
                         178),
-                    Alignment = DataGridViewContentAlignment.MiddleCenter
+                    Alignment =
+                        DataGridViewContentAlignment.MiddleCenter,
+                    SelectionBackColor =
+                        Color.FromArgb(220, 228, 238),
+                    SelectionForeColor =
+                        Color.FromArgb(25, 40, 60)
                 };
 
             dgvAccounts.DefaultCellStyle =
@@ -145,14 +157,29 @@
                 {
                     BackColor = Color.White,
                     ForeColor = Color.FromArgb(30, 45, 65),
-                    SelectionBackColor = Color.FromArgb(205, 220, 238),
-                    SelectionForeColor = Color.FromArgb(15, 30, 50),
+                    SelectionBackColor =
+                        Color.FromArgb(190, 210, 232),
+                    SelectionForeColor =
+                        Color.FromArgb(20, 35, 55),
                     Font = new Font(
                         "Arial",
                         10F,
                         FontStyle.Regular,
                         GraphicsUnit.Point,
-                        178)
+                        178),
+                    Alignment =
+                        DataGridViewContentAlignment.MiddleCenter
+                };
+
+            dgvAccounts.AlternatingRowsDefaultCellStyle =
+                new DataGridViewCellStyle
+                {
+                    BackColor = Color.FromArgb(248, 250, 252),
+                    ForeColor = Color.FromArgb(30, 45, 65),
+                    SelectionBackColor =
+                        Color.FromArgb(190, 210, 232),
+                    SelectionForeColor =
+                        Color.FromArgb(20, 35, 55)
                 };
 
             dgvAccounts.EnableHeadersVisualStyles = false;
@@ -161,6 +188,7 @@
             dgvAccounts.Name = "dgvAccounts";
             dgvAccounts.ReadOnly = true;
             dgvAccounts.RowHeadersWidth = 62;
+            dgvAccounts.RowTemplate.Height = 34;
             dgvAccounts.SelectionMode =
                 DataGridViewSelectionMode.FullRowSelect;
             dgvAccounts.MultiSelect = false;
