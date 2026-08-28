@@ -46,6 +46,7 @@ namespace SecurePasswordManager.Forms
                     MessageBoxIcon.Warning);
 
                 txtMasterPassword.Focus();
+
                 return;
             }
 
@@ -105,6 +106,21 @@ namespace SecurePasswordManager.Forms
                 DialogResult.Cancel;
 
             Close();
+        }
+
+        private void btnShowPassword_Click(
+            object? sender,
+            EventArgs e)
+        {
+            txtMasterPassword.UseSystemPasswordChar =
+                !txtMasterPassword.UseSystemPasswordChar;
+
+            btnShowPassword.Text =
+                txtMasterPassword.UseSystemPasswordChar
+                    ? "إظهار"
+                    : "إخفاء";
+
+            txtMasterPassword.Focus();
         }
     }
 }

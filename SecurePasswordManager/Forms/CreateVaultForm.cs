@@ -34,7 +34,6 @@ namespace SecurePasswordManager.Forms
             {
                 SecurePasswordManager.Security.MasterPasswordValidator.Validate(
                     masterPassword);
-
             }
             catch (ArgumentException ex)
             {
@@ -49,8 +48,7 @@ namespace SecurePasswordManager.Forms
                 return;
             }
 
-            if (masterPassword !=
-                confirmPassword)
+            if (masterPassword != confirmPassword)
             {
                 MessageBox.Show(
                     "كلمتا المرور غير متطابقتين.",
@@ -107,6 +105,36 @@ namespace SecurePasswordManager.Forms
                 DialogResult.Cancel;
 
             Close();
+        }
+
+        private void btnShowMasterPassword_Click(
+            object? sender,
+            EventArgs e)
+        {
+            txtMasterPassword.UseSystemPasswordChar =
+                !txtMasterPassword.UseSystemPasswordChar;
+
+            btnShowMasterPassword.Text =
+                txtMasterPassword.UseSystemPasswordChar
+                    ? "إظهار"
+                    : "إخفاء";
+
+            txtMasterPassword.Focus();
+        }
+
+        private void btnShowConfirmPassword_Click(
+            object? sender,
+            EventArgs e)
+        {
+            txtConfirmPassword.UseSystemPasswordChar =
+                !txtConfirmPassword.UseSystemPasswordChar;
+
+            btnShowConfirmPassword.Text =
+                txtConfirmPassword.UseSystemPasswordChar
+                    ? "إظهار"
+                    : "إخفاء";
+
+            txtConfirmPassword.Focus();
         }
     }
 }
